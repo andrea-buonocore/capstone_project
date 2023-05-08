@@ -1,0 +1,9 @@
+@import './partials/colors';
+
+footer {
+    background-color: $minimal_gray;
+
+    .accordion-button {
+        font-weight: light;
+    }
+}

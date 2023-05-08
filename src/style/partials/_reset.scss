@@ -1,7 +1,22 @@
-html, body {
+@import './colors';
+
+html,
+body {
     height: 100%;
     width: 100%;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+
+a {
+    text-decoration: none;
+
+    &:visited,
+    &:link,
+    &:active,
+    &:hover {
+        text-decoration: none;
+        color: $main_gray !important;
+    }
 }
