@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Container, Row } from "react-bootstrap"
+import { Col, Container, Row } from "react-bootstrap"
 import { useParams } from "react-router-dom";
 import Product from "./Product";
 
@@ -8,38 +8,39 @@ const CategoryPage = () => {
     const CATEGORIES_URL = 'https://fakestoreapi.com/products/category/';
     const params = useParams();
     console.log('params', params);
-    const categoryParam = params.category.replace(' ','');
-    
+    const categoryParam = params.category.replace(' ', '');
+
     const [products, setProducts] = useState([]);
 
     const getCategoryProducts = async () => {
-        try{
+        try {
             let res = await fetch(CATEGORIES_URL + params.category);
-            if(res.ok){
+            if (res.ok) {
                 let data = await res.json();
-                console.log(data);
+                setProducts(data);
             }
+            else return new Error(res.statusText);
         }
-        catch(err){
+        catch (err) {
             console.log(err);
         }
     }
 
     useEffect(() => {
         getCategoryProducts();
-    },[])
+    }, [])
 
     return (
-        <Container>
-            <Row xs={1} md={3}>
+        <Container className="py-5 overflow-x-auto">
+            
                 {
                     products && (
-                        products.map((product, index) => {
-                            <Product key={index}/>
-                        })
+                        products.map((product, index) => (
+                            <Product key={index} product={product}/>
+                        ))
                     )
                 }
-            </Row>
+            
         </Container>
     )
 }

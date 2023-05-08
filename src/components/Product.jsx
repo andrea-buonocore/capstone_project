@@ -1,8 +1,18 @@
-const Product = () => {
+import { Col, Container } from "react-bootstrap";
+
+const Product = ({ product }) => {
     return (
-        <div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum quisquam veniam laborum quas nobis dignissimos neque ut, ab laboriosam? Atque corrupti itaque repudiandae tempora pariatur! Ea sit quaerat placeat obcaecati.
-        </div>
+        <>
+            <div className="my-3 position-relative shadow product_card">
+                <div className="d-flex align-items-center justify-content-center position-absolute favorite">
+                    <span className="material-symbols-outlined">
+                        favorite
+                    </span>
+                </div>
+                <img src={product.image} alt={product.title} className="object-fit-contain"/>
+            </div>
+            
+        </>
     )
 }
 
