@@ -11,11 +11,11 @@ const Header = () => {
     }
 
     return (
-        <header className="py-4 fixed-top">
+        <header className="py-4">
             <Container className="d-flex align-items-center justify-content-between">
                 <span className="fw-bold">STYLEX</span>
                 <div className="d-flex align-items-center">
-                    <input type="text" name="search" placeholder="search product..." id="inputField"/>
+                    <input type="text" name="search" className="d-none" placeholder="search product..." id="inputField"/>
                     <span className="material-symbols-outlined mx-3" onClick={toggleInputField}>
                         search
                     </span>
