@@ -13,14 +13,14 @@ const MainContainer = () => {
                             <span className="fw-light">WOMEN</span>
                         </Col>
                     </Link>
-                    <Link to={'/category/men'}>
+                    <Link to={'/category/men\'s clothing'}>
                         <Col className="py-5 col_category d-flex align-items-center justify-content-center">
                             <span className="fw-light">MEN</span>
                         </Col>
                     </Link>
-                    <Link to={'/category/accessories'}>
+                    <Link to={'/category/jewelery'}>
                         <Col className="py-5 col_category d-flex align-items-center justify-content-center">
-                            <span className="fw-light">ACCESSORIES</span>
+                            <span className="fw-light">JEWELERY</span>
                         </Col>
                     </Link>
                 </Row>

@@ -31,14 +31,7 @@ const CategoryPage = () => {
     }, [])
 
     return (
-        <div className="py-5 slider position relative border border-1">
-
-            <div className="position-absolute top-0">
-                <span class="material-symbols-outlined">
-                    arrow_back
-                </span>
-            </div>
-
+        <div className="category_container position relative container">
             {
                 products && (
                     products.map((product, index) => (
@@ -46,13 +39,6 @@ const CategoryPage = () => {
                     ))
                 )
             }
-
-            <div className="position-absolute">
-                <span class="material-symbols-outlined">
-                    arrow_back
-                </span>
-            </div>
-
         </div>
     )
 }
