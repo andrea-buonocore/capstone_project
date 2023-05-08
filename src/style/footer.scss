@@ -1,9 +1,13 @@
 @import './partials/colors';
+@import './partials/mixins';
+@import './partials/breakpoints';
 
 footer {
     background-color: $minimal_gray;
 
-    .accordion-button {
-        font-weight: light;
-    }
+    @include devices (tablet){
+        .container {
+            width: 50%;
+        }
+    }    
 }

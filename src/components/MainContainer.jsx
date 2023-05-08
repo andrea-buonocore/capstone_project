@@ -6,7 +6,7 @@ const MainContainer = () => {
     return (
         <>
             <Hero />
-            <Container>
+            <Container className="py-3">
                 <Row xs={1} md={3}>
                     <Link to={'/category/women'}>
                         <Col className="py-5 col_category d-flex align-items-center justify-content-center">

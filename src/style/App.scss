@@ -5,6 +5,13 @@
 @import './main_container.scss';
 @import './footer.scss';
 
+body {
+    position: relative;
+}
+
 .App {
     color: $main_gray;
+    position: absolute;
+    width: 100%;
+    height: 100%;
 }

@@ -1,11 +1,12 @@
 import { Container, Row, Col } from 'react-bootstrap';
 import Accordion from 'react-bootstrap/Accordion';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
         <footer className="py-5">
             <Container>
-                <span className='d-block mb-3 fw-bold fs-2'>F.A.Q. <br></br>(Frequently Asked Question)</span>
+                <span className='d-block text-center mb-5 fw-bold fs-1'>F.A.Q.</span>
                 <Accordion className='my-3'>
                     <Accordion.Item eventKey="0">
                         <Accordion.Header>What is your return policy?</Accordion.Header>
@@ -46,7 +47,10 @@ const Footer = () => {
                         </Accordion.Body>
                     </Accordion.Item>
                 </Accordion>
-                <span className='d-block text-center mt-3 fw-light'>&copy; Andrea Buonocore {new Date().getFullYear()}</span>
+                <a href="https://www.linkedin.com/in/andreabuonocore00/" target='_blank'>
+                    <span className='d-block text-center mt-5 fw-light'>&copy; Andrea Buonocore {new Date().getFullYear()}</span>
+                </a>
+
             </Container >
         </footer >
     )
