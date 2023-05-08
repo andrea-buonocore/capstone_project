@@ -31,14 +31,16 @@ const CategoryPage = () => {
     }, [])
 
     return (
-        <div className="category_container position relative container">
-            {
-                products && (
-                    products.map((product, index) => (
-                        <Product key={index} product={product} />
-                    ))
-                )
-            }
+        <div className="category_container container">
+            <Row md={3}>
+                {
+                    products && (
+                        products.map((product, index) => (
+                            <Product key={index} product={product} />
+                        ))
+                    )
+                }
+            </Row>
         </div>
     )
 }

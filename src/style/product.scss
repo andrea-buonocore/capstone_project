@@ -2,8 +2,11 @@
 @import './partials/colors';
 
 .product_card {
-
     border: 1px solid $minimal_gray;
+
+    img {
+        object-fit: contain;
+    }
 
     .favorite {
         aspect-ratio: 1/1;

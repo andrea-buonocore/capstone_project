@@ -1,8 +1,10 @@
 @import './partials/breakpoints';
 @import './partials/mixins';
 @import './partials/variables';
+
 #hero {
     height: 400px;
+    padding: $padding;
 
     h1 {
         text-align: center;
