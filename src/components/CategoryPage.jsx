@@ -31,17 +31,29 @@ const CategoryPage = () => {
     }, [])
 
     return (
-        <Container className="py-5 overflow-x-auto">
-            
-                {
-                    products && (
-                        products.map((product, index) => (
-                            <Product key={index} product={product}/>
-                        ))
-                    )
-                }
-            
-        </Container>
+        <div className="py-5 slider position relative border border-1">
+
+            <div className="position-absolute top-0">
+                <span class="material-symbols-outlined">
+                    arrow_back
+                </span>
+            </div>
+
+            {
+                products && (
+                    products.map((product, index) => (
+                        <Product key={index} product={product} />
+                    ))
+                )
+            }
+
+            <div className="position-absolute">
+                <span class="material-symbols-outlined">
+                    arrow_back
+                </span>
+            </div>
+
+        </div>
     )
 }
 

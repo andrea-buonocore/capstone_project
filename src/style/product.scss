@@ -2,8 +2,8 @@
 @import './partials/colors';
 
 .product_card {
-    border: 1px solid red;
-    height: 400px;
+
+    border: 1px solid $minimal_gray;
 
     .favorite {
         aspect-ratio: 1/1;
@@ -12,7 +12,7 @@
         right: 0;
 
         span {
-            &:hover{
+            &:hover {
                 color: black;
             }
         }
