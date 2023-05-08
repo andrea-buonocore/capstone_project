@@ -2,3 +2,8 @@
 @import './partials/colors';
 @import './header.scss';
 @import './hero.scss';
+@import './main_container.scss';
+
+.App {
+    color: $main_gray;
+}
