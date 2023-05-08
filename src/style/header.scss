@@ -9,6 +9,7 @@ header {
     
     a {
         color: $minimal_gray;
+        transition: all 0.3s ease;
     }
     color: $minimal_gray;
     background-color: $main_gray;

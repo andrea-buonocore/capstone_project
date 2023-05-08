@@ -6,18 +6,19 @@ const Header = () => {
     window.onscroll = function () {
         let header = document.getElementsByTagName('header')[0];
 
-        if (window.scrollY > 50) {            
+        if (window.scrollY > 50) {
             header.classList.add('scrolled_header');
         } else {
             header.classList.remove('scrolled_header');
         }
     }
 
-    //riferimento al input field
-    let inputField = document.getElementById('inputField')
+
+    //riferimento all'input field
+    const inputField = document.getElementById('inputField')
 
     const toggleInputField = () => {
-        inputField.classList.toggle('d-none');
+        inputField.classList.toggle('d-none')
     }
 
     return (
@@ -26,11 +27,11 @@ const Header = () => {
                 <Link to={'/'}>
                     <span className="fw-bold">styleX</span>
                 </Link>
-                <div className="d-none d-md-block d-flex flex-row align-items-center">
-                    <input type="text" name="search" className="d-none" placeholder="search product..." id="inputField" />
+                <div className="d-none d-md-inline-block d-flex flex-row align-items-center">
                     <span className="material-symbols-outlined mx-3" onClick={toggleInputField}>
                         search
                     </span>
+                    <input type="text" name="search" className="d-none" placeholder="search product..." id="inputField" />
                     <Link to={'/favorites'} style={{ padding: 0 }}>
                         <span className="material-symbols-outlined mx-3">
                             favorite
