@@ -7,8 +7,6 @@ const CategoryPage = () => {
 
     const CATEGORIES_URL = 'https://fakestoreapi.com/products/category/';
     const params = useParams();
-    console.log('params', params);
-    const categoryParam = params.category.replace(' ', '');
 
     const [products, setProducts] = useState([]);
 
@@ -31,8 +29,8 @@ const CategoryPage = () => {
     }, [])
 
     return (
-        <div className="category_container container px-4">
-            <Row>
+        <Container className="category_container">
+            <Row xs={2} md={3}>
                 {
                     products && (
                         products.map((product, index) => (
@@ -41,7 +39,7 @@ const CategoryPage = () => {
                     )
                 }
             </Row>
-        </div>
+        </Container>
     )
 }
 

@@ -1,24 +1,21 @@
-@import './partials/mixins';
 @import './partials/colors';
 
-.product_card {
-    border: 1px solid $minimal_gray;
+.product_container {
 
     img {
-        object-fit: contain;
+        
+        object-fit: cover;
+        transition: transform 0.2s ease;
+
+        &:hover {
+            transform: scale(1.1);
+            cursor: pointer;
+        }
     }
 
     .favorite {
-        aspect-ratio: 1/1;
-        width: 50px;
         background-color: $minimal_gray;
-        right: 0;
-        top: 0;
-
-        span {
-            &:hover {
-                color: black;
-            }
-        }
+        aspect-ratio: 1;
+        width: 30px;
     }
 }
