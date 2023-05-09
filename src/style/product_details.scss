@@ -1,0 +1,13 @@
+@import './partials/colors';
+@import './partials/variables';
+.details_container {
+
+    padding: $padding;
+
+    .btn_atc {
+        background-color: $main_gray;
+        color: $minimal_gray;
+        border: none;
+        padding: 1em 2em;
+    }
+}

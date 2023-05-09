@@ -1,5 +1,5 @@
 import { Col } from "react-bootstrap";
-
+import { Link } from 'react-router-dom';
 const Product = ({ product }) => {
     return (
 
@@ -10,10 +10,14 @@ const Product = ({ product }) => {
                         favorite
                     </span>
                 </div>
-                <img src={product.image} alt={product.title} />
+
+                <Link to={`/product/${product.id}`}>
+                    <img src={product.image} alt={product.title} />
+                </Link>
             </div>
-            <div className="text-center">
-                <span className="d-inline-block text-center my-3 fw-light product_price py-2 px-3 rounded-pill">$ {product.price}</span>
+            <div>
+                <span className="d-inline-block fw-light product_price my-2">$ {product.price}</span>
+                <span className="d-block">{product.title}</span>
             </div>
         </Col>
 
