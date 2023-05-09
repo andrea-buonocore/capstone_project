@@ -6,7 +6,7 @@ const Footer = () => {
     return (
         <footer className="py-5">
             <Container>
-                <span className='d-block text-center mb-5 fw-bold fs-1'>F.A.Q.</span>
+                <span className='d-block text-center mb-5 fw-light fs-1'>F.A.Q.</span>
                 <Accordion className='my-3'>
                     <Accordion.Item eventKey="0">
                         <Accordion.Header>What is your return policy?</Accordion.Header>

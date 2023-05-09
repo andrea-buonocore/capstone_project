@@ -10,7 +10,10 @@ const Product = ({ product }) => {
                         favorite
                     </span>
                 </div>
-                <img src={product.image} alt={product.title}/>
+                <img src={product.image} alt={product.title} />
+            </div>
+            <div className="text-center">
+                <span className="d-inline-block text-center my-3 fw-light product_price py-2 px-3 rounded-pill">$ {product.price}</span>
             </div>
         </Col>
 
