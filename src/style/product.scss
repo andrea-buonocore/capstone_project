@@ -2,13 +2,17 @@
 
 .product_container {
 
+    .product_img_container {
+        border: 1px solid $minimal_gray;
+        padding: 1em;
+    }
+
     img {
-        
+        height: 200px;
         object-fit: cover;
-        transition: transform 0.2s ease;
 
         &:hover {
-            transform: scale(1.1);
+
             cursor: pointer;
         }
     }
@@ -16,6 +20,6 @@
     .favorite {
         background-color: $minimal_gray;
         aspect-ratio: 1;
-        width: 30px;
+        width: 40px;
     }
 }

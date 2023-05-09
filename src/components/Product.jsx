@@ -3,14 +3,14 @@ import { Col } from "react-bootstrap";
 const Product = ({ product }) => {
     return (
 
-        <Col className="my-3 position-relative product_container">
-            <div className="h-100 d-flex align-items-center justify-content-center">
+        <Col className="my-3 product_container">
+            <div className="d-flex align-items-center justify-content-center position-relative product_img_container">
                 <div className="d-flex align-items-center justify-content-center position-absolute favorite end-0 top-0">
                     <span className="material-symbols-outlined">
                         favorite
                     </span>
                 </div>
-                <img src={product.image} alt={product.title} className="img-fluid" />
+                <img src={product.image} alt={product.title}/>
             </div>
         </Col>
 

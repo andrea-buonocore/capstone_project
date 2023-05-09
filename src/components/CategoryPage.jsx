@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap"
 import { useParams } from "react-router-dom";
 import Product from "./Product";
+import Spinner from 'react-bootstrap/Spinner';
 
 const CategoryPage = () => {
 
@@ -9,6 +10,7 @@ const CategoryPage = () => {
     const params = useParams();
 
     const [products, setProducts] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     const getCategoryProducts = async () => {
         try {
@@ -16,11 +18,16 @@ const CategoryPage = () => {
             if (res.ok) {
                 let data = await res.json();
                 setProducts(data);
+                setIsLoading(!isLoading);
             }
-            else return new Error(res.statusText);
+            else {
+                return new Error(res.statusText);
+                setIsLoading(!isLoading);
+            }
         }
         catch (err) {
             console.log(err);
+            setIsLoading(!isLoading);
         }
     }
 
@@ -30,7 +37,16 @@ const CategoryPage = () => {
 
     return (
         <Container className="category_container">
-            <Row xs={2} md={3}>
+            {
+                isLoading && (
+                    <div className="text-center my-3">
+                        <Spinner animation="border" role="status">
+                            <span className="visually-hidden">Loading...</span>
+                        </Spinner>
+                    </div>
+                )
+            }
+            <Row xs={2} md={4}>
                 {
                     products && (
                         products.map((product, index) => (
