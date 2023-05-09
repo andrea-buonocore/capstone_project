@@ -15,6 +15,8 @@ const ProductDetails = () => {
 
     const [showA, setShowA] = useState(false);
     const toggleShowA = () => setShowA(!showA);
+    const [showB, setShowB] = useState(false);
+    const toggleShowB = () => setShowB(!showB);
 
     const getProductDetail = async () => {
         try {
@@ -26,7 +28,6 @@ const ProductDetails = () => {
             }
             else {
                 return new Error(res.statusText);
-                setIsLoading(!isLoading);
             };
         }
         catch (err) { console.log(err); setIsLoading(!isLoading); }
@@ -61,6 +62,9 @@ const ProductDetails = () => {
                             <span className="d-block my-3">{product.description}</span>
                             <span className="d-block fw-light">$ {product.price}</span>
                             <div className="text-end">
+                                <button className="my-3 mx-2 btn_atf" onClick={toggleShowB}>
+                                    [heart]
+                                </button>
                                 <button className="my-3 btn_atc" onClick={toggleShowA}>Add To Cart</button>
                             </div>
                         </Col>
@@ -68,6 +72,15 @@ const ProductDetails = () => {
                             <Toast show={showA} onClose={toggleShowA} delay={3000} autohide>
                                 <Toast.Header>
                                     <span className="me-auto">added to cart!</span>
+                                    <small>now</small>
+                                </Toast.Header>
+                                <Toast.Body>{product.title}</Toast.Body>
+                            </Toast>
+                        </ToastContainer>
+                        <ToastContainer position="bottom-start" className="p-3 position-fixed">
+                            <Toast show={showB} onClose={toggleShowB} delay={3000} autohide>
+                                <Toast.Header>
+                                    <span className="me-auto">added to favorites!</span>
                                     <small>now</small>
                                 </Toast.Header>
                                 <Toast.Body>{product.title}</Toast.Body>
