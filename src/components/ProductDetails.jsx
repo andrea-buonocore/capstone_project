@@ -33,14 +33,14 @@ const ProductDetails = () => {
             {
                 product && (
                     <Row>
-                        <Col xs={12} md={4} className="d-flex align-items-center justify-content-center">
+                        <Col xs={12} md={6} lg={4} className="d-flex align-items-center justify-content-center">
                             <img src={product.image} alt={product.title} height={300} className="object-fit-contain" />
                         </Col>
-                        <Col xs={12} md={8} className="p-3">
-                            <span className="d-block">{product.rating.rate}/5</span>
+                        <Col xs={12} md={6} lg={8} className="p-3">
+                            <span className="d-block my-3">[star] {product.rating.rate}/5</span>
                             <span className="d-block fw-bold fs-5">{product.title}</span>
                             <span className="d-block my-3">{product.description}</span>
-                            <span className="d-block">$ {product.price}</span>
+                            <span className="d-block fw-light">$ {product.price}</span>
                             <div className="text-end">
                                 <button className="my-3 btn_atc">Add To Cart</button>
                             </div>
