@@ -17,6 +17,11 @@ a {
     &:active,
     &:hover {
         text-decoration: none;
-        color: $main_gray;
+        color: $main_gray !important;
     }
 }
+
+// .accordion-button {
+//     background: $main_gray !important;
+//     color: $minimal_gray !important;
+// }
