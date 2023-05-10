@@ -26,13 +26,13 @@ const ProductDetails = () => {
             if (res.ok) {
                 let data = await res.json();
                 setProduct(data);
-                setIsLoading(!isLoading);
+                setIsLoading(false);
             }
             else {
                 return new Error(res.statusText);
             };
         }
-        catch (err) { console.log(err); setIsLoading(!isLoading); }
+        catch (err) { console.log(err); setIsLoading(false); }
 
 
     }

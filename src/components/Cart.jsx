@@ -14,10 +14,10 @@ const Cart = () => {
             if (res.ok) {
                 let data = await res.json();
                 setCart(data);
-                setIsLoading(!isLoading);
+                setIsLoading(false);
             }
             else {
-                setIsLoading(!isLoading);
+                setIsLoading(false);
                 return new Error(res.statusText);
             };
         }
@@ -32,7 +32,7 @@ const Cart = () => {
             if (res.ok) {
                 alert(`${product.title} removed from cart.`);
                 getCartProducts();
-                setIsLoading(!isLoading);
+                setIsLoading(false);
             }
             else return new Error(res.statusText)
 
@@ -48,6 +48,13 @@ const Cart = () => {
 
     return (
         <Container id="cart_container" className="px-3">
+            
+            {
+                cart.length == 0 && (
+                    <span className="d-block text-center my-5">You have not added any item yet</span>
+                )
+            }
+
             {
                 isLoading && (
                     <div className="text-center my-3">
@@ -83,7 +90,9 @@ const Cart = () => {
                     })
                 )
             }
-            <span className="my-5 d-block text-end">Total: $ {total}</span>
+            <span className="my-5 d-block text-end">
+                {cart?.length > 0 ? 'Total: $ {total}' : null}
+            </span>
         </Container>
     )
 }
