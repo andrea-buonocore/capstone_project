@@ -4,10 +4,11 @@ import { useParams } from "react-router-dom";
 import Spinner from 'react-bootstrap/Spinner';
 import Toast from 'react-bootstrap/Toast';
 
+export const CART_URL = 'http://localhost:3030/cart';
+
 const ProductDetails = () => {
 
     const PRODUCT_URL = 'https://fakestoreapi.com/products/';
-    const CART_URL = 'http://localhost:3030/cart';
 
     const params = useParams();
 
@@ -37,7 +38,7 @@ const ProductDetails = () => {
     }
 
     const addToCart = async (product) => {
-        try{
+        try {
             let res = await fetch(CART_URL, {
                 method: "POST",
                 headers: {
@@ -45,12 +46,12 @@ const ProductDetails = () => {
                 },
                 body: JSON.stringify(product)
             })
-            if(res.ok){
+            if (res.ok) {
                 alert(`${product.title} aggiunto al carrello!`);
             }
-            else return new Error (res.statusText);
+            else return new Error(res.statusText);
         }
-        catch(err){
+        catch (err) {
             console.log(err);
         }
     }
