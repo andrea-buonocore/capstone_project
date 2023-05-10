@@ -22,14 +22,32 @@ const Cart = () => {
             };
         }
         catch (err) { console.log(err); setIsLoading(!isLoading); }
-
-
     }
 
-    useEffect(() => { getCartProducts() }, [])
+    const removeFromCart = async (product) => {
+        try {
+            let res = await fetch(CART_URL + product.id, {
+                method: "DELETE"
+            });
+            if (res.ok) {
+                alert(`${product.title} removed from cart.`);
+                getCartProducts();
+                setIsLoading(!isLoading);
+            }
+            else return new Error(res.statusText)
+
+        }
+        catch (err) {
+            console.log(err)
+        }
+    }
+
+    useEffect(() => { getCartProducts() }, []);
+
+    const total = cart?.reduce((accumulator, current) => accumulator + current.price, 0);
 
     return (
-        <Container id="cart_container">
+        <Container id="cart_container" className="px-3">
             {
                 isLoading && (
                     <div className="text-center my-3">
@@ -52,8 +70,10 @@ const Cart = () => {
                                     <span className="d-block my-3">{product.title}</span>
                                     <span className="d-block fw-light fs-5 my-3">$ {product.price}</span>
                                 </Col>
-                                <Col xs={2} lg={1}>
-                                    <span class="material-symbols-outlined">
+                                <Col xs={2} lg={1} className="d-flex align-items-center justify-content-end">
+                                    <span className="material-symbols-outlined" onClick={() => {
+                                        removeFromCart(product);
+                                    }}>
                                         close
                                     </span>
                                 </Col>
@@ -63,7 +83,7 @@ const Cart = () => {
                     })
                 )
             }
-
+            <span className="my-5 d-block text-end">Total: $ {total}</span>
         </Container>
     )
 }

@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import Spinner from 'react-bootstrap/Spinner';
 import Toast from 'react-bootstrap/Toast';
 
-export const CART_URL = 'http://localhost:3030/cart';
+export const CART_URL = 'http://localhost:3030/cart/';
 
 const ProductDetails = () => {
 
