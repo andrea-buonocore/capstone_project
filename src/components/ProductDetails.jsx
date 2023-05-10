@@ -7,6 +7,7 @@ import Toast from 'react-bootstrap/Toast';
 const ProductDetails = () => {
 
     const PRODUCT_URL = 'https://fakestoreapi.com/products/';
+    const CART_URL = 'http://localhost:3030/cart';
 
     const params = useParams();
 
@@ -33,6 +34,25 @@ const ProductDetails = () => {
         catch (err) { console.log(err); setIsLoading(!isLoading); }
 
 
+    }
+
+    const addToCart = async (product) => {
+        try{
+            let res = await fetch(CART_URL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(product)
+            })
+            if(res.ok){
+                alert(`${product.title} aggiunto al carrello!`);
+            }
+            else return new Error (res.statusText);
+        }
+        catch(err){
+            console.log(err);
+        }
     }
 
     useEffect(() => {
@@ -65,7 +85,10 @@ const ProductDetails = () => {
                                 <button className="my-3 mx-2 btn_atf" onClick={toggleShowB}>
                                     [heart]
                                 </button>
-                                <button className="my-3 btn_atc" onClick={toggleShowA}>Add To Cart</button>
+                                <button className="my-3 btn_atc" onClick={() => {
+                                    addToCart(product);
+                                    toggleShowA();
+                                }}>Add To Cart</button>
                             </div>
                         </Col>
                         <ToastContainer position="bottom-start" className="p-3 position-fixed">

@@ -2,7 +2,7 @@ const { Container } = require("react-bootstrap")
 
 const Cart = () => {
     return (
-        <Container>
+        <Container id="cart_container">
             Cart
         </Container>
     )

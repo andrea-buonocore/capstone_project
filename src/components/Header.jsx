@@ -37,9 +37,11 @@ const Header = () => {
                             favorite
                         </span>
                     </Link>
-                    <span className="material-symbols-outlined mx-3">
-                        shopping_cart
-                    </span>
+                    <Link to={'/cart'}>
+                        <span className="material-symbols-outlined mx-3">
+                            shopping_cart
+                        </span>
+                    </Link>
                     <span className="material-symbols-outlined mx-3">
                         account_circle
                     </span>
