@@ -1,19 +1,20 @@
-import { useEffect, useState } from "react";
-import { CART_URL } from './ProductDetails';
-import Spinner from 'react-bootstrap/Spinner';
 import { Col, Container, Row } from "react-bootstrap";
+import Spinner from 'react-bootstrap/Spinner';
+import { useEffect, useState } from "react";
+import { FAVORITES_URL } from './ProductDetails';
 
-const Cart = () => {
 
-    const [cart, setCart] = useState([]);
+const Favorites = () => {
+    
+    const [favorites, setFavorites] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
-    const getCartProducts = async () => {
+    const getFavorites = async () => {
         try {
-            let res = await fetch(CART_URL);
+            let res = await fetch(FAVORITES_URL);
             if (res.ok) {
                 let data = await res.json();
-                setCart(data);
+                setFavorites(data);
                 setIsLoading(false);
             }
             else {
@@ -21,17 +22,17 @@ const Cart = () => {
                 return new Error(res.statusText);
             };
         }
-        catch (err) { console.log(err); setIsLoading(!isLoading); }
+        catch (err) { console.log(err); setIsLoading(false); }
     }
 
-    const removeFromCart = async (product) => {
+    const removeFromFavorites = async (product) => {
         try {
-            let res = await fetch(CART_URL + product.id, {
+            let res = await fetch(FAVORITES_URL + product.id, {
                 method: "DELETE"
             });
             if (res.ok) {
                 alert(`${product.title} removed from cart.`);
-                getCartProducts();
+                getFavorites();
                 setIsLoading(false);
             }
             else return new Error(res.statusText)
@@ -42,16 +43,12 @@ const Cart = () => {
         }
     }
 
-    useEffect(() => { getCartProducts() }, []);
-
-    const total = cart?.reduce((accumulator, current) => accumulator + current.price, 0);
-
+    useEffect(() => { getFavorites() }, []);
     return (
-        <Container id="cart_container" className="px-3">
-            <h2 className="my-3">Cart</h2>
-
+        <Container id="favorites_container" className="px-3">
+            <h2 className="my-3">Favorites</h2>
             {
-                cart.length == 0 && (
+                favorites.length == 0 && (
                     <span className="d-block text-center my-5">You have not added any item yet</span>
                 )
             }
@@ -67,8 +64,8 @@ const Cart = () => {
             }
 
             {
-                cart && (
-                    cart.map((product, index) => {
+                favorites && (
+                    favorites.map((product, index) => {
                         return (
                             <Row key={index} xs={1} className="my-3 align-items-center">
                                 <Col xs={3} lg={1}>
@@ -78,9 +75,9 @@ const Cart = () => {
                                     <span className="d-block my-3">{product.title}</span>
                                     <span className="d-block fw-light fs-5 my-3">$ {product.price}</span>
                                 </Col>
-                                <Col xs={2} lg={1} className="d-flex align-items-center justify-content-end">
+                                <Col xs={2} lg={1} className="d-flex align-items-center justify-content-center">
                                     <span className="material-symbols-outlined" onClick={() => {
-                                        removeFromCart(product);
+                                        removeFromFavorites(product);
                                     }}>
                                         close
                                     </span>
@@ -91,11 +88,8 @@ const Cart = () => {
                     })
                 )
             }
-            <span className="my-5 d-block text-end">
-                {cart?.length > 0 ? `Total: $ ${total}` : null}
-            </span>
         </Container>
     )
 }
 
-export default Cart;
+export default Favorites;

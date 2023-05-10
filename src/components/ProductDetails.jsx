@@ -5,11 +5,11 @@ import Spinner from 'react-bootstrap/Spinner';
 import Toast from 'react-bootstrap/Toast';
 
 export const CART_URL = 'http://localhost:3030/cart/';
+export const FAVORITES_URL = 'http://localhost:3030/favorites/'
 
 const ProductDetails = () => {
 
     const PRODUCT_URL = 'https://fakestoreapi.com/products/';
-    const FAVORITES_URL = 'http://localhost:3030/favorites/'
 
     const params = useParams();
 

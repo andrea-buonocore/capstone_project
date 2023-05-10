@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 import CategoryPage from './components/CategoryPage';
 import ProductDetails from './components/ProductDetails';
 import Cart from './components/Cart';
+import Favorites from './components/Favorites';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path='/category/:category' element={<CategoryPage />} />
           <Route path='/product/:id' element={<ProductDetails />} />
           <Route path='/cart' element={<Cart />} />
+          <Route path='/favorites' element={<Favorites/>} />
         </Routes>
         <Footer />
       </div>
