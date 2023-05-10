@@ -9,6 +9,7 @@ export const CART_URL = 'http://localhost:3030/cart/';
 const ProductDetails = () => {
 
     const PRODUCT_URL = 'https://fakestoreapi.com/products/';
+    const FAVORITES_URL = 'http://localhost:3030/favorites/'
 
     const params = useParams();
 
@@ -47,7 +48,26 @@ const ProductDetails = () => {
                 body: JSON.stringify(product)
             })
             if (res.ok) {
-                alert(`${product.title} aggiunto al carrello!`);
+                return;
+            }
+            else return new Error(res.statusText);
+        }
+        catch (err) {
+            console.log(err);
+        }
+    }
+
+    const addToFavorites = async (product) => {
+        try {
+            let res = await fetch(FAVORITES_URL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(product)
+            })
+            if (res.ok) {
+                return;
             }
             else return new Error(res.statusText);
         }
@@ -83,7 +103,10 @@ const ProductDetails = () => {
                             <span className="d-block my-3">{product.description}</span>
                             <span className="d-block fw-light fs-5 my-3">$ {product.price}</span>
                             <div className="text-end">
-                                <button className="my-3 mx-2 btn_atf" onClick={toggleShowB}>
+                                <button className="my-3 mx-2 btn_atf" onClick={() => {
+                                    addToFavorites(product);
+                                    toggleShowB();
+                                }}>
                                     [heart]
                                 </button>
                                 <button className="my-3 btn_atc" onClick={() => {

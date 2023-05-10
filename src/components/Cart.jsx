@@ -91,7 +91,7 @@ const Cart = () => {
                 )
             }
             <span className="my-5 d-block text-end">
-                {cart?.length > 0 ? 'Total: $ {total}' : null}
+                {cart?.length > 0 ? `Total: $ ${total}` : null}
             </span>
         </Container>
     )
