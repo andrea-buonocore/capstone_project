@@ -98,7 +98,11 @@ const ProductDetails = () => {
                             <img src={product.image} alt={product.title} height={300} className="object-fit-contain product_img" />
                         </Col>
                         <Col xs={12} md={6} lg={8} className="p-3">
-                            <span className="d-block my-3">[star] {product.rating.rate}/5</span>
+                            <div className="d-flex align-items center my-3">
+                                <span>
+                                    {product.rating.rate}/5
+                                </span>
+                            </div>
                             <span className="d-block fw-bold fs-5">{product.title}</span>
                             <span className="d-block my-3">{product.description}</span>
                             <span className="d-block fw-light fs-5 my-3">$ {product.price}</span>
@@ -107,7 +111,7 @@ const ProductDetails = () => {
                                     addToFavorites(product);
                                     toggleShowB();
                                 }}>
-                                    [heart]
+                                    Add To Favorites
                                 </button>
                                 <button className="my-3 btn_atc" onClick={() => {
                                     addToCart(product);

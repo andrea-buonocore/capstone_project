@@ -2,10 +2,11 @@ import { Col, Container, Row } from "react-bootstrap";
 import Spinner from 'react-bootstrap/Spinner';
 import { useEffect, useState } from "react";
 import { FAVORITES_URL } from './ProductDetails';
+import { Link } from "react-router-dom";
 
 
 const Favorites = () => {
-    
+
     const [favorites, setFavorites] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -46,7 +47,7 @@ const Favorites = () => {
     useEffect(() => { getFavorites() }, []);
     return (
         <Container id="favorites_container" className="px-3">
-            <h2 className="my-3">Favorites</h2>
+            <h3 className="my-5">Favorites</h3>
             {
                 favorites.length == 0 && (
                     <span className="d-block text-center my-5">You have not added any item yet</span>
@@ -69,7 +70,9 @@ const Favorites = () => {
                         return (
                             <Row key={index} xs={1} className="my-3 align-items-center">
                                 <Col xs={3} lg={1}>
-                                    <img src={product.image} alt={product.title} className="img-fluid" />
+                                    <Link to={`/product/${product.id}`}>
+                                        <img src={product.image} alt={product.title} className="img-fluid" />
+                                    </Link>
                                 </Col>
                                 <Col xs={7} lg={10}>
                                     <span className="d-block my-3">{product.title}</span>
@@ -82,6 +85,7 @@ const Favorites = () => {
                                         close
                                     </span>
                                 </Col>
+
                             </Row>
 
                         )

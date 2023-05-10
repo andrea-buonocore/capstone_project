@@ -48,7 +48,7 @@ const Cart = () => {
 
     return (
         <Container id="cart_container" className="px-3">
-            <h2 className="my-3">Cart</h2>
+            <h3 className="my-5">Cart</h3>
 
             {
                 cart.length == 0 && (
