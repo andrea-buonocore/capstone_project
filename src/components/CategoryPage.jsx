@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap"
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Product from "./Product";
 import Spinner from 'react-bootstrap/Spinner';
+import Breadcrumb from 'react-bootstrap/Breadcrumb';
+import { LinkContainer } from 'react-router-bootstrap';
+
 
 const CategoryPage = () => {
 
@@ -37,6 +40,14 @@ const CategoryPage = () => {
 
     return (
         <Container className="category_container">
+            <Breadcrumb>
+                <LinkContainer to='/'>
+                    <Breadcrumb.Item>home</Breadcrumb.Item>
+                </LinkContainer>
+                <Breadcrumb.Item active>
+                    {params?.category}
+                </Breadcrumb.Item>
+            </Breadcrumb>
             {
                 isLoading && (
                     <div className="text-center my-3">

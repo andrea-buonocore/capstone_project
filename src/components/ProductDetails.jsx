@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Container, Row, ToastContainer } from "react-bootstrap"
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Spinner from 'react-bootstrap/Spinner';
 import Toast from 'react-bootstrap/Toast';
+import Breadcrumb from 'react-bootstrap/Breadcrumb';
+import { LinkContainer } from 'react-router-bootstrap';
+
 
 export const CART_URL = 'http://localhost:3030/cart/';
 export const FAVORITES_URL = 'http://localhost:3030/favorites/'
@@ -82,6 +85,20 @@ const ProductDetails = () => {
 
     return (
         <Container className="details_container">
+            <Breadcrumb>
+                <LinkContainer to='/'>
+                    <Breadcrumb.Item>home</Breadcrumb.Item>
+                </LinkContainer>
+                
+                <LinkContainer to={`/category/${product?.category}`}>
+                    <Breadcrumb.Item>
+                        {product?.category}
+                    </Breadcrumb.Item>
+                </LinkContainer>
+                <Breadcrumb.Item active>
+                    {product?.title}
+                </Breadcrumb.Item>
+            </Breadcrumb>
             {
                 isLoading && (
                     <div className="text-center my-3">

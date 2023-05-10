@@ -51,7 +51,7 @@ const Cart = () => {
             <h3 className="my-5">Cart</h3>
 
             {
-                cart.length == 0 && (
+                cart.length === 0 && (
                     <span className="d-block text-center my-5">You have not added any item yet</span>
                 )
             }

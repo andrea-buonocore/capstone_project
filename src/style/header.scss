@@ -8,7 +8,7 @@ header {
 .scrolled_header {
     
     a {
-        color: $minimal_gray;
+        color: $minimal_gray !important;
         transition: all 0.3s ease;
     }
     color: $minimal_gray;
