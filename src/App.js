@@ -6,6 +6,7 @@ import MainContainer from './components/MainContainer';
 import Footer from './components/Footer';
 import CategoryPage from './components/CategoryPage';
 import ProductDetails from './components/ProductDetails';
+import Cart from './components/Cart';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path='/' element={<MainContainer />} />
           <Route path='/category/:category' element={<CategoryPage />} />
           <Route path='/product/:id' element={<ProductDetails />} />
+          <Route path='/cart' element={<Cart />} />
         </Routes>
         <Footer />
       </div>
