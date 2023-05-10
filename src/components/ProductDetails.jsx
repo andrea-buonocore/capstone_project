@@ -95,7 +95,7 @@ const ProductDetails = () => {
                 product && (
                     <Row>
                         <Col xs={12} md={6} lg={4} className="d-flex align-items-center justify-content-center">
-                            <img src={product.image} alt={product.title} height={300} className="object-fit-contain product_img" />
+                            <img src={product.image} alt={product.title} className="object-fit-contain product_img" />
                         </Col>
                         <Col xs={12} md={6} lg={8} className="p-3">
                             <div className="d-flex align-items center my-3">

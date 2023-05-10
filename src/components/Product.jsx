@@ -6,7 +6,7 @@ const Product = ({ product }) => {
         <Col className="my-3 product_container">
             <div className="d-flex align-items-center justify-content-center position-relative product_img_container">
                 <Link to={`/product/${product.id}`}>
-                    <img src={product.image} alt={product.title}/>
+                    <img src={product.image} alt={product.title} className="img-fluid"/>
                 </Link>
             </div>
             <div>
