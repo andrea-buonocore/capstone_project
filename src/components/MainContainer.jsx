@@ -20,7 +20,7 @@ const MainContainer = () => {
                     </Link>
                     <Link to={'/category/jewelery'}>
                         <Col className="py-5 col_category d-flex align-items-center justify-content-center">
-                            <span className="fw-light">JEWELERY</span>
+                            <span className="fw-light">JEWELRY</span>
                         </Col>
                     </Link>
                 </Row>

@@ -60,7 +60,7 @@ const ProductDetails = () => {
                             <span className="d-block my-3">[star] {product.rating.rate}/5</span>
                             <span className="d-block fw-bold fs-5">{product.title}</span>
                             <span className="d-block my-3">{product.description}</span>
-                            <span className="d-block fw-light">$ {product.price}</span>
+                            <span className="d-block fw-light fs-5 my-3">$ {product.price}</span>
                             <div className="text-end">
                                 <button className="my-3 mx-2 btn_atf" onClick={toggleShowB}>
                                     [heart]
