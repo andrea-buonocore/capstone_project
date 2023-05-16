@@ -8,20 +8,22 @@ import CategoryPage from './components/CategoryPage';
 import ProductDetails from './components/ProductDetails';
 import Cart from './components/Cart';
 import Favorites from './components/Favorites';
+import Login from './components/Login';
 
 function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <Header />
+
         <Routes>
-          <Route path='/' element={<MainContainer />} />
+          <Route path='/' element={<Login />} />
+          <Route path='/home' element={<MainContainer />} />
           <Route path='/category/:category' element={<CategoryPage />} />
           <Route path='/product/:id' element={<ProductDetails />} />
           <Route path='/cart' element={<Cart />} />
-          <Route path='/favorites' element={<Favorites/>} />
+          <Route path='/favorites' element={<Favorites />} />
         </Routes>
-        <Footer />
+
       </div>
     </BrowserRouter>
   );

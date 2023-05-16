@@ -24,7 +24,7 @@ const Header = () => {
     return (
         <header className="py-4 fixed-top">
             <Container className="d-flex align-items-center justify-content-between">
-                <Link to={'/'}>
+                <Link to={'/home'}>
                     <span className="fw-bold">styleX</span>
                 </Link>
                 <div className="d-none d-md-inline-block d-flex flex-row align-items-center">

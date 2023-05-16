@@ -86,7 +86,7 @@ const ProductDetails = () => {
     return (
         <Container className="details_container">
             <Breadcrumb>
-                <LinkContainer to='/'>
+                <LinkContainer to='/home'>
                     <Breadcrumb.Item>home</Breadcrumb.Item>
                 </LinkContainer>
                 

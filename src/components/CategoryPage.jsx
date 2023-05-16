@@ -41,7 +41,7 @@ const CategoryPage = () => {
     return (
         <Container className="category_container">
             <Breadcrumb>
-                <LinkContainer to='/'>
+                <LinkContainer to='/home'>
                     <Breadcrumb.Item>home</Breadcrumb.Item>
                 </LinkContainer>
                 <Breadcrumb.Item active>
