@@ -1,3 +1,35 @@
 @import './partials/colors';
 @import './partials/mixins';
 @import './partials/breakpoints';
+
+$error_color: #d66262;
+
+.input_label {
+    font-size: 0.9em;
+}
+
+input,
+#submit {
+    @include button;
+    width: 100%;
+    padding: 0.5em;
+}
+
+#submit {
+    background-color: $main_gray;
+    color: $minimal_gray;
+}
+
+.input_error {
+    border: 2px solid $error_color;
+}
+
+.input_error_msg {
+    font-size: 0.8em;
+    color: $error_color;
+}
+
+.form_col {
+    border: 1px solid $minimal_gray;
+    border-radius: 5px;
+}

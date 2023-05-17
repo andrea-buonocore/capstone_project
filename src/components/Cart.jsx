@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { CART_URL } from './ProductDetails';
 import Spinner from 'react-bootstrap/Spinner';
 import { Col, Container, Row } from "react-bootstrap";
+import Header from './Header';
+import Footer from './Footer';
 
 const Cart = () => {
 
@@ -47,54 +49,59 @@ const Cart = () => {
     const total = cart?.reduce((accumulator, current) => accumulator + current.price, 0);
 
     return (
-        <Container id="cart_container" className="px-3">
-            <h3 className="my-5">Cart</h3>
+        <>
+            <Header />
+            <Container id="cart_container" className="px-3">
 
-            {
-                cart.length === 0 && (
-                    <span className="d-block text-center my-5">You have not added any item yet</span>
-                )
-            }
+                <h3 className="my-5">Cart</h3>
 
-            {
-                isLoading && (
-                    <div className="text-center my-3">
-                        <Spinner animation="border" role="status">
-                            <span className="visually-hidden">Loading...</span>
-                        </Spinner>
-                    </div>
-                )
-            }
+                {
+                    cart.length === 0 && (
+                        <span className="d-block text-center my-5">You have not added any item yet</span>
+                    )
+                }
 
-            {
-                cart && (
-                    cart.map((product, index) => {
-                        return (
-                            <Row key={index} xs={1} className="my-3 align-items-center">
-                                <Col xs={3} lg={1}>
-                                    <img src={product.image} alt={product.title} className="img-fluid" />
-                                </Col>
-                                <Col xs={7} lg={10}>
-                                    <span className="d-block my-3">{product.title}</span>
-                                    <span className="d-block fw-light fs-5 my-3">$ {product.price}</span>
-                                </Col>
-                                <Col xs={2} lg={1} className="d-flex align-items-center justify-content-end">
-                                    <span className="material-symbols-outlined" onClick={() => {
-                                        removeFromCart(product);
-                                    }}>
-                                        close
-                                    </span>
-                                </Col>
-                            </Row>
+                {
+                    isLoading && (
+                        <div className="text-center my-3">
+                            <Spinner animation="border" role="status">
+                                <span className="visually-hidden">Loading...</span>
+                            </Spinner>
+                        </div>
+                    )
+                }
 
-                        )
-                    })
-                )
-            }
-            <span className="my-5 d-block text-end">
-                {cart?.length > 0 ? `Total: $ ${total}` : null}
-            </span>
-        </Container>
+                {
+                    cart && (
+                        cart.map((product, index) => {
+                            return (
+                                <Row key={index} xs={1} className="my-3 align-items-center">
+                                    <Col xs={3} lg={1}>
+                                        <img src={product.image} alt={product.title} className="img-fluid" />
+                                    </Col>
+                                    <Col xs={7} lg={10}>
+                                        <span className="d-block my-3">{product.title}</span>
+                                        <span className="d-block fw-light fs-5 my-3">$ {product.price}</span>
+                                    </Col>
+                                    <Col xs={2} lg={1} className="d-flex align-items-center justify-content-end">
+                                        <span className="material-symbols-outlined" onClick={() => {
+                                            removeFromCart(product);
+                                        }}>
+                                            close
+                                        </span>
+                                    </Col>
+                                </Row>
+
+                            )
+                        })
+                    )
+                }
+                <span className="my-5 d-block text-end">
+                    {cart?.length > 0 ? `Total: $ ${total}` : null}
+                </span>
+            </Container>
+            <Footer/>
+        </>
     )
 }
 

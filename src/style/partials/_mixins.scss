@@ -3,21 +3,29 @@
 @mixin devices ($breakpoint) {
     //the name of the mixin is devices
 
-    @if $breakpoint == mobile {
+    @if $breakpoint ==mobile {
         @media only screen and (max-width: $sm) {
             @content;
         }
     }
 
-    @if $breakpoint == tablet {
+    @if $breakpoint ==tablet {
         @media only screen and (min-width: $md) {
             @content;
         }
     }
-    
-    @if $breakpoint == laptop {
+
+    @if $breakpoint ==laptop {
         @media only screen and (min-width: $lg) {
             @content;
         }
     }
+}
+
+
+@mixin button {
+    border-radius: 5px;
+    border: none;
+    background-color: $minimal_gray;
+    color: $main_gray;
 }

@@ -16,7 +16,11 @@ function App() {
       <div className="App">
 
         <Routes>
-          <Route path='/' element={<Login />} />
+
+          {
+            localStorage.getItem('user') ? <Route path='/' element={<MainContainer />} /> : <Route path='/' element={<Login />} />
+          }
+
           <Route path='/home' element={<MainContainer />} />
           <Route path='/category/:category' element={<CategoryPage />} />
           <Route path='/product/:id' element={<ProductDetails />} />

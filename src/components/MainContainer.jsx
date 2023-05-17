@@ -1,7 +1,7 @@
 import { Col, Container, Row } from "react-bootstrap"
 import Hero from "./Hero";
 import { Link } from "react-router-dom";
-
+import Footer from './Footer';
 const MainContainer = () => {
     return (
         <>
@@ -25,6 +25,7 @@ const MainContainer = () => {
                     </Link>
                 </Row>
             </Container>
+            <Footer/>
         </>
     )
 }
