@@ -1,19 +1,18 @@
 import { Col, Container, Row } from "react-bootstrap";
 import Spinner from 'react-bootstrap/Spinner';
 import { useEffect, useState } from "react";
-import { FAVORITES_URL } from './ProductDetails';
 import { Link } from "react-router-dom";
 import Header from './Header';
 import Footer from './Footer';
 
 const Favorites = () => {
-
+    const USER_URL = `http://localhost:3030/users/${localStorage.getItem('userID')}`;
     const [favorites, setFavorites] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     const getFavorites = async () => {
         try {
-            let res = await fetch(FAVORITES_URL);
+            let res = await fetch(USER_URL);
             if (res.ok) {
                 let data = await res.json();
                 setFavorites(data);
@@ -29,7 +28,7 @@ const Favorites = () => {
 
     const removeFromFavorites = async (product) => {
         try {
-            let res = await fetch(FAVORITES_URL + product.id, {
+            let res = await fetch(USER_URL + product.id, {
                 method: "DELETE"
             });
             if (res.ok) {

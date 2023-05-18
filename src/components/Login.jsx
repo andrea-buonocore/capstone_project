@@ -26,34 +26,30 @@ const Login = () => {
     });
 
     const checkIfUserExists = async (email, password) => {
-        
         try {
             let res = await fetch(USERS_URL);
-            if(res.ok){
+            if (res.ok) {
                 let users = await res.json();
-                console.table(users);
-                if (users[0].email === email.toLowerCase() && users[0].password === password.toLowerCase()){
-                    localStorage.setItem('user', email);
+                const userExists = users.find(user => user.email === email.toLowerCase() && user.password === password.toLowerCase());
+                if (userExists) {
+                    localStorage.setItem('userID', userExists.id);
                     navigate('/home');
+                } else {
+                    alert('User does not exist');
                 }
-                else alert('user do not exist')
-                
-                
-
+            } else {
+                throw new Error(res.statusText);
             }
-            else{
-                return new Error(res.statusText);
-            }
-        }
-        catch(e){
+        } catch (e) {
             console.log(e);
         }
     }
 
+
     return (
         <Container className='h-100'>
             <Row className='justify-content-center h-100 align-items-center px-5'>
-                <Col xs={12} md={6} className='form_col'>
+                <Col xs={12} md={4} className='form_col'>
                     <form onSubmit={formik.handleSubmit} autoComplete='off'>
                         <div className='my-3'>
                             <label htmlFor="email" className='d-block input_label mb-2'>Email</label>

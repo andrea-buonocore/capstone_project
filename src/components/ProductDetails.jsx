@@ -8,10 +8,11 @@ import { LinkContainer } from 'react-router-bootstrap';
 import Header from './Header';
 import Footer from './Footer';
 
-export const CART_URL = 'http://localhost:3030/cart/';
-export const FAVORITES_URL = 'http://localhost:3030/favorites/'
 
 const ProductDetails = () => {
+
+    const USER_URL = `http://localhost:3030/users/${localStorage.getItem('userID')}`;
+    console.log("USER_URL", USER_URL);
 
     const PRODUCT_URL = 'https://fakestoreapi.com/products/';
 
@@ -44,17 +45,30 @@ const ProductDetails = () => {
 
     const addToCart = async (product) => {
         try {
-            let res = await fetch(CART_URL, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(product)
-            })
-            if (res.ok) {
-                return;
+
+            let response = await fetch(USER_URL);
+
+            if (response.ok) {
+
+                let user = await response.json();
+
+                user.cart.push(product);
+
+                let res = await fetch(USER_URL, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(user)
+                })
+                if (res.ok) {
+                    return;
+                }
+                else return new Error(res.statusText);
             }
-            else return new Error(res.statusText);
+
+            else return new Error(response.statusText);
+
         }
         catch (err) {
             console.log(err);
@@ -63,17 +77,25 @@ const ProductDetails = () => {
 
     const addToFavorites = async (product) => {
         try {
-            let res = await fetch(FAVORITES_URL, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(product)
-            })
-            if (res.ok) {
-                return;
+            let response = await fetch(USER_URL);
+            if (response.ok) {
+                let user = await response.json();
+                user.favorites.push(product);
+                let res = await fetch(USER_URL, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(user)
+                })
+                if (res.ok) {
+                    return;
+                }
+                else return new Error(res.statusText);
             }
-            else return new Error(res.statusText);
+
+            else return new Error(response.statusText);
+
         }
         catch (err) {
             console.log(err);
@@ -86,7 +108,7 @@ const ProductDetails = () => {
 
     return (
         <>
-            <Header/>
+            <Header />
             <Container className="details_container">
                 <Breadcrumb>
                     <LinkContainer to='/home'>
@@ -161,7 +183,7 @@ const ProductDetails = () => {
                     )
                 }
             </Container>
-            <Footer/>
+            <Footer />
         </>
     )
 }

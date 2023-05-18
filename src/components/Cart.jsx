@@ -1,21 +1,21 @@
 import { useEffect, useState } from "react";
-import { CART_URL } from './ProductDetails';
+
 import Spinner from 'react-bootstrap/Spinner';
 import { Col, Container, Row } from "react-bootstrap";
 import Header from './Header';
 import Footer from './Footer';
 
 const Cart = () => {
-
+    const USER_URL = `http://localhost:3030/users/${localStorage.getItem('userID')}`;
     const [cart, setCart] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     const getCartProducts = async () => {
         try {
-            let res = await fetch(CART_URL);
+            let res = await fetch(USER_URL);
             if (res.ok) {
                 let data = await res.json();
-                setCart(data);
+                setCart(data.cart);
                 setIsLoading(false);
             }
             else {
@@ -28,15 +28,29 @@ const Cart = () => {
 
     const removeFromCart = async (product) => {
         try {
-            let res = await fetch(CART_URL + product.id, {
-                method: "DELETE"
-            });
-            if (res.ok) {
-                alert(`${product.title} removed from cart.`);
-                getCartProducts();
-                setIsLoading(false);
+
+            let response = await fetch(USER_URL);
+            if (response.ok) {
+                let user = await response.json();
+                user.cart = user.cart.filter(item => item.id !== product.id);
+                let res = await fetch(USER_URL, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(user)
+                });
+                if (res.ok) {
+                    // window.confirm(`Do you really want to remove ${product.title} from your cart?`);
+
+                    alert(`${product.title} removed from cart.`);
+                    getCartProducts();
+                    setIsLoading(false);
+
+                }
+                else return new Error(res.statusText);
             }
-            else return new Error(res.statusText)
+            else return new Error(response.statusText);
 
         }
         catch (err) {
@@ -100,7 +114,7 @@ const Cart = () => {
                     {cart?.length > 0 ? `Total: $ ${total}` : null}
                 </span>
             </Container>
-            <Footer/>
+            <Footer />
         </>
     )
 }

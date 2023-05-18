@@ -18,6 +18,11 @@ input,
 #submit {
     background-color: $main_gray;
     color: $minimal_gray;
+    transition: background-color 0.3s ease;
+}
+
+#submit:hover {
+    background-color: #535353;
 }
 
 .input_error {
