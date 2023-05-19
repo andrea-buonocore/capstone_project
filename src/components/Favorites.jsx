@@ -15,7 +15,7 @@ const Favorites = () => {
             let res = await fetch(USER_URL);
             if (res.ok) {
                 let data = await res.json();
-                setFavorites(data);
+                setFavorites(data.favorites);
                 setIsLoading(false);
             }
             else {
@@ -28,15 +28,29 @@ const Favorites = () => {
 
     const removeFromFavorites = async (product) => {
         try {
-            let res = await fetch(USER_URL + product.id, {
-                method: "DELETE"
-            });
-            if (res.ok) {
-                alert(`${product.title} removed from cart.`);
-                getFavorites();
-                setIsLoading(false);
+
+            let response = await fetch(USER_URL);
+            if (response.ok) {
+                let user = await response.json();
+                user.favorites = user.favorites.filter(item => item.id !== product.id);
+                let res = await fetch(USER_URL, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(user)
+                });
+                if (res.ok) {
+                    // window.confirm(`Do you really want to remove ${product.title} from your cart?`);
+
+                    alert(`${product.title} removed from favorites.`);
+                    getFavorites();
+                    setIsLoading(false);
+
+                }
+                else return new Error(res.statusText);
             }
-            else return new Error(res.statusText)
+            else return new Error(response.statusText);
 
         }
         catch (err) {
