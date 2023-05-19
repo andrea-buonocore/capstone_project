@@ -9,6 +9,7 @@ import ProductDetails from './components/ProductDetails';
 import Cart from './components/Cart';
 import Favorites from './components/Favorites';
 import Login from './components/Login';
+import SignUp from './components/SignUp';
 
 function App() {
   return (
@@ -26,6 +27,8 @@ function App() {
           <Route path='/product/:id' element={<ProductDetails />} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/favorites' element={<Favorites />} />
+          <Route path='/signup' element={<SignUp />} />
+        
         </Routes>
 
       </div>

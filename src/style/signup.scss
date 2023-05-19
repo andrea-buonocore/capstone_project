@@ -1,0 +1,23 @@
+@import './partials/colors';
+@import './partials/mixins';
+@import './partials/breakpoints';
+
+
+#login {
+    span {
+        font-size: 0.8em;
+    }
+
+    button {
+        @include button;
+        width: 100%;
+        padding: 0.5em;
+        background-color: $main_gray;
+        color: $minimal_gray;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: #424141;
+        }
+    }
+}

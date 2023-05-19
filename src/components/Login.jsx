@@ -30,12 +30,12 @@ const Login = () => {
             let res = await fetch(USERS_URL);
             if (res.ok) {
                 let users = await res.json();
-                const userExists = users.find(user => user.email === email.toLowerCase() && user.password === password.toLowerCase());
+                let userExists = users.find(user => user.email === email.toLowerCase() && user.password === password.toLowerCase());
                 if (userExists) {
                     localStorage.setItem('userID', userExists.id);
                     navigate('/home');
                 } else {
-                    alert('User does not exist');
+                    alert('Invalid email or password. Please try again.');
                 }
             } else {
                 throw new Error(res.statusText);
@@ -84,6 +84,11 @@ const Login = () => {
 
                         <button type="submit" id='submit' className='my-3'>LOGIN</button>
                     </form>
+                    <div id='create_account' className='my-3'>
+                        <span>Don't you have any account?</span> <br></br>
+                        <button type="button" className='my-3' onClick={() => {navigate('/signup')}}>SIGN UP</button>
+                    </div>
+
                 </Col>
             </Row>
         </Container>
