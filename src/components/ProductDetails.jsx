@@ -12,7 +12,6 @@ import Footer from './Footer';
 const ProductDetails = () => {
 
     const USER_URL = `http://localhost:3030/users/${localStorage.getItem('userID')}`;
-    console.log("USER_URL", USER_URL);
 
     const PRODUCT_URL = 'https://fakestoreapi.com/products/';
 
@@ -25,6 +24,9 @@ const ProductDetails = () => {
     const toggleShowA = () => setShowA(!showA);
     const [showB, setShowB] = useState(false);
     const toggleShowB = () => setShowB(!showB);
+
+    const [isFavorite, setIsFavorite] = useState(false);
+    const [isCart, setIsCart] = useState(false);
 
     const getProductDetail = async () => {
         try {
@@ -44,6 +46,9 @@ const ProductDetails = () => {
     }
 
     const addToCart = async (product) => {
+
+        let quantity = document.getElementById('quantity').value;
+
         try {
 
             let response = await fetch(USER_URL);
@@ -51,7 +56,7 @@ const ProductDetails = () => {
             if (response.ok) {
 
                 let user = await response.json();
-
+                product.quantity = quantity;
                 user.cart.push(product);
 
                 let res = await fetch(USER_URL, {
@@ -62,6 +67,7 @@ const ProductDetails = () => {
                     body: JSON.stringify(user)
                 })
                 if (res.ok) {
+                    setIsCart(true);
                     return;
                 }
                 else return new Error(res.statusText);
@@ -89,6 +95,7 @@ const ProductDetails = () => {
                     body: JSON.stringify(user)
                 })
                 if (res.ok) {
+                    setIsFavorite(true);
                     return;
                 }
                 else return new Error(res.statusText);
@@ -102,15 +109,59 @@ const ProductDetails = () => {
         }
     }
 
+    const checkFavorite = async () => {
+        try {
+            let res = await fetch(USER_URL);
+            if (res.ok) {
+                let user = await res.json();
+                let favorite = user.favorites.some(item => item.id === product?.id);
+                console.log('favorite', favorite)
+                setIsFavorite(favorite);
+            }
+            else {
+                return new Error(res.statusText);
+            }
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
+    const checkCart = async () => {
+        try {
+            let res = await fetch(USER_URL);
+            if (res.ok) {
+                let user = await res.json();
+                let cart = user.cart.some(item => item.id === product?.id);
+                console.log('cart', cart)
+                setIsCart(cart);
+            }
+            else {
+                return new Error(res.statusText);
+            }
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
     useEffect(() => {
         getProductDetail();
+
     }, [])
+
+    useEffect(() => {
+        if (product) {
+            checkFavorite();
+            checkCart();
+        }
+    }, [product]);
 
     return (
         <>
             <Header />
             <Container className="details_container">
-                <Breadcrumb>
+                <Breadcrumb className="my-3">
                     <LinkContainer to='/home'>
                         <Breadcrumb.Item>home</Breadcrumb.Item>
                     </LinkContainer>
@@ -148,17 +199,39 @@ const ProductDetails = () => {
                                 <span className="d-block fw-bold fs-5">{product.title}</span>
                                 <span className="d-block my-3">{product.description}</span>
                                 <span className="d-block fw-light fs-5 my-3">$ {product.price}</span>
+                                <label htmlFor="quantity">Quantity: </label>
+                                <select name="quantity" id="quantity" className="mx-3 px-1">
+                                    <option value="1" selected>1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
                                 <div className="text-end">
                                     <button className="my-3 mx-2 btn_atf" onClick={() => {
                                         addToFavorites(product);
                                         toggleShowB();
-                                    }}>
-                                        Add To Favorites
+                                    }}
+                                        disabled={isFavorite}
+                                    >
+                                        {
+                                            isFavorite ? 'Added to Favorites' : 'Add to Favorites'
+                                        }
                                     </button>
                                     <button className="my-3 btn_atc" onClick={() => {
                                         addToCart(product);
                                         toggleShowA();
-                                    }}>Add To Cart</button>
+                                    }}
+                                        disabled={isCart}>
+                                        {
+                                            isCart ? 'Added to Cart' : 'Add to Cart'
+                                        }
+                                    </button>
                                 </div>
                             </Col>
                             <ToastContainer position="bottom-start" className="p-3 position-fixed">

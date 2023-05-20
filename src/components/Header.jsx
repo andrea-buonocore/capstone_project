@@ -1,7 +1,14 @@
 import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import Badge from 'react-bootstrap/Badge';
+import { useEffect, useState } from "react";
 
 const Header = () => {
+
+    const [cartItems, setCartItems] = useState(0);
+    const [favoritesItems, setFavoritesItems] = useState(0);
+
+    const USER_URL = `http://localhost:3030/users/${localStorage.getItem('userID')}`;
 
     window.onscroll = function () {
         let header = document.getElementsByTagName('header')[0];
@@ -21,6 +28,46 @@ const Header = () => {
         inputField.classList.toggle('d-none')
     }
 
+    const getCartItems = async () => {
+        try {
+            let res = await fetch(USER_URL);
+            if (res.ok) {
+                let user = await res.json();
+                let cart = user.cart.length;
+                setCartItems(cart);
+            }
+            else {
+                return new Error(res.statusText);
+            }
+
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+    const getFavoritesItems = async () => {
+        try {
+            let res = await fetch(USER_URL);
+            if (res.ok) {
+                let user = await res.json();
+                let favorites = user.favorites.length;
+                setFavoritesItems(favorites);
+            }
+            else {
+                return new Error(res.statusText);
+            }
+
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
+    useEffect(() => {
+        getFavoritesItems();
+        getCartItems();
+    }, [])
+
     return (
         <header className="py-4 fixed-top">
             <Container className="d-flex align-items-center justify-content-between">
@@ -33,21 +80,28 @@ const Header = () => {
                     </span>
                     <input type="text" name="search" className="d-none" placeholder="search product..." id="inputField" />
                     <Link to={'/favorites'} style={{ padding: 0 }}>
-                        <span className="material-symbols-outlined mx-3">
-                            favorite
-                        </span>
+                        <div className="d-inline-block position-relative mx-3">
+                            <span className="material-symbols-outlined">
+                                favorite
+                            </span>
+
+                            <span className="position-absolute mx-1">{favoritesItems === 0 ? null : favoritesItems}</span>
+                        </div>
                     </Link>
                     <Link to={'/cart'}>
-                        <span className="material-symbols-outlined mx-3">
-                            shopping_cart
-                        </span>
+                        <div className="d-inline-block position-relative mx-3">
+                            <span className="material-symbols-outlined">
+                                shopping_cart
+                            </span>
+                            <span className="position-absolute mx-1">{cartItems === 0 ? null : cartItems}</span>
+                        </div>
                     </Link>
                     <span className="material-symbols-outlined mx-3">
                         account_circle
                     </span>
                 </div>
             </Container>
-        </header>
+        </header >
     )
 }
 
