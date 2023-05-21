@@ -4,12 +4,14 @@ import Spinner from 'react-bootstrap/Spinner';
 import { Col, Container, Row } from "react-bootstrap";
 import Header from './Header';
 import Footer from './Footer';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Cart = () => {
+  
     const USER_URL = `http://localhost:3030/users/${localStorage.getItem('userID')}`;
     const [cart, setCart] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+
 
     const getCartProducts = async () => {
         try {
@@ -59,9 +61,10 @@ const Cart = () => {
         }
     }
 
+
     useEffect(() => { getCartProducts() }, []);
 
-    let total = cart?.reduce((accumulator, current) => accumulator + current.price*current.quantity, 0);
+    let total = cart?.reduce((accumulator, current) => accumulator + current.price * current.quantity, 0);
 
     return (
         <>
@@ -91,17 +94,17 @@ const Cart = () => {
                         cart.map((product, index) => {
                             return (
                                 <Row key={index} xs={1} className="my-3 align-items-center">
-                                    <Col xs={3}  md={2} lg={1}>
+                                    <Col xs={3} md={2} lg={1}>
                                         <Link to={`/product/${product.id}`}>
                                             <img src={product.image} alt={product.title} className="img-fluid" />
                                         </Link>
                                     </Col>
-                                    <Col xs={7}  md={8} lg={10} className="px-md-4">
+                                    <Col xs={7} md={8} lg={10} className="px-md-4">
                                         <span className="d-block my-3">{product.title}</span>
                                         <span className="d-block my-3">Quantity: {product.quantity}</span>
                                         <span className="d-block fw-light my-3">$ {product.price * product.quantity}</span>
                                     </Col>
-                                    <Col xs={2}  md={2} lg={1} className="d-flex align-items-center justify-content-end">
+                                    <Col xs={2} md={2} lg={1} className="d-flex align-items-center justify-content-end">
                                         <span className="material-symbols-outlined" onClick={() => {
                                             removeFromCart(product);
                                         }}>
@@ -117,6 +120,8 @@ const Cart = () => {
                 <span className="my-5 d-block text-end">
                     {cart?.length > 0 ? `Total: $ ${total}` : null}
                 </span>
+                <button>Checkout</button>
+
             </Container>
             <Footer />
         </>
