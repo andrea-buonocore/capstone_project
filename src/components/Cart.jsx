@@ -26,7 +26,7 @@ const Cart = () => {
                 quantity: 1,
             }],
             mode: 'payment',
-            successUrl: 'https://example.com/success',
+            successUrl: `${window.location.origin}/thankyou`,
             cancelUrl: 'https://example.com/cancel',
             billingAddressCollection: 'required',
 
@@ -89,56 +89,30 @@ const Cart = () => {
             let res = await fetch(USER_URL);
             if (res.ok) {
                 let user = await res.json();
-                user.purchases = [];
-                let newPurchase = cart;
-                user.purchases.push(newPurchase);
-
+                user.purchases = user.cart; // Copia l'array "cart" in "purchases"
+                user.cart = []; // Svuota l'array "cart"
                 let response = await fetch(USER_URL, {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify(user)
-                })
-
-                if (response.ok) {
-                    return;
-                }
-            }
-            else {
-                return new Error(res.statusText);
-            }
-        }
-        catch (e) {
-            console.log(e);
-        }
-    }
-
-    const emptyCart = async () => {
-        try {
-            let res = await fetch(USER_URL);
-            if (res.ok) {
-                let user = await res.json();
-                user.cart = [];
-                let response = await fetch(USER_URL, {
-                    method: "PUT",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(user),
                 });
 
                 if (response.ok) {
-                    setCart([]); // Aggiungi questa riga per svuotare "cart" nello stato locale
+                    setCart([]); // Aggiorna lo stato locale dell'array "cart" a vuoto
                     return;
                 }
             } else {
                 return new Error(res.statusText);
             }
-        } catch (error) {
-            console.log(error);
+        } catch (e) {
+            console.log(e);
         }
     };
+
+
+    
 
 
     useEffect(() => { getCartProducts() }, []);
@@ -201,7 +175,6 @@ const Cart = () => {
                 </span>
                 <div className="text-end">
                     <button role="link" onClick={() => {
-                        emptyCart();
                         savePurchase();
                         handleClick();
 

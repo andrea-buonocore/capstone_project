@@ -10,6 +10,7 @@ import Cart from './components/Cart';
 import Favorites from './components/Favorites';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
+import ThankYou from './components/ThankYou';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path='/cart' element={<Cart />} />
           <Route path='/favorites' element={<Favorites />} />
           <Route path='/signup' element={<SignUp />} />    
+          <Route path='/thankyou' element={<ThankYou />} />    
         </Routes>
 
       </div>
