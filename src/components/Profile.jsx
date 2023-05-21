@@ -44,18 +44,12 @@ const Profile = () => {
                             <span className="my-3">Your Purchases:</span>
 
                             {
-                                user.purchases.map((product, index) => {
+                                user.purchases.map((purchase, index) => {
                                     return (
                                         <Row key={index} xs={1} className="my-3 align-items-center">
-                                            <Col xs={2} md={2} lg={1}>
-                                                <Link to={`/product/${product.id}`}>
-                                                    <img src={product.image} alt={product.title} className="img-fluid" />
-                                                </Link>
-                                            </Col>
-                                            <Col xs={10} md={10} lg={11} className="px-md-4">
-                                                <span className="d-block my-3">{product.title}</span>
-                                                <span className="d-block my-3">Quantity: {product.quantity}</span>
-                                                <span className="d-block fw-light my-3">$ {product.price * product.quantity}</span>
+                                            <Col>
+                                                <span>Date: {purchase.date}</span>
+                                                <span>$ </span>
                                             </Col>
                                         </Row>
                                     )

@@ -89,14 +89,21 @@ const Cart = () => {
             let res = await fetch(USER_URL);
             if (res.ok) {
                 let user = await res.json();
-                user.purchases.push(...user.cart);
+
+                // Crea un nuovo oggetto che contiene l'oggetto del carrello e la data corrente
+                let purchase = {
+                    items: user.cart,
+                    date: new Date().toString()
+                };
+
+                user.purchases.push(purchase); // Aggiungi il nuovo oggetto al tuo array "purchases"
                 user.cart = []; // Svuota l'array "cart"
                 let response = await fetch(USER_URL, {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    body: JSON.stringify(user)
+                    body: JSON.stringify(user),
                 });
 
                 if (response.ok) {
@@ -110,6 +117,7 @@ const Cart = () => {
             console.log(e);
         }
     };
+
 
 
     
