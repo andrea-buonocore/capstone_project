@@ -5,13 +5,36 @@ import { Col, Container, Row } from "react-bootstrap";
 import Header from './Header';
 import Footer from './Footer';
 import { Link, useNavigate } from "react-router-dom";
+import { loadStripe } from '@stripe/stripe-js';
 
 const Cart = () => {
-  
+
     const USER_URL = `http://localhost:3030/users/${localStorage.getItem('userID')}`;
     const [cart, setCart] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
+    // Make sure to call `loadStripe` outside of a component’s render to avoid
+    // recreating the `Stripe` object on every render.
+    const stripePromise = loadStripe('pk_test_51N9qvHKdxhxiyBgdi6nDFLK1CDYNDzLfNedo548tjCyXTwwmT068mHHNHtAii9ZITaN1pg82mGsvU2PkymAc4d1b006OHBZrRL');
+
+    const handleClick = async (event) => {
+        // When the customer clicks on the button, redirect them to Checkout.
+        const stripe = await stripePromise;
+        const { error } = await stripe.redirectToCheckout({
+            lineItems: [{
+                price: 'price_1N9rVkKdxhxiyBgdCWHdlOgn', // Replace with the ID of your price
+                quantity: 1,
+            }],
+            mode: 'payment',
+            successUrl: 'https://example.com/success',
+            cancelUrl: 'https://example.com/cancel',
+            billingAddressCollection: 'required',
+
+        });
+        // If `redirectToCheckout` fails due to a browser or network
+        // error, display the localized error message to your customer
+        // using `error.message`.
+    };
 
     const getCartProducts = async () => {
         try {
@@ -120,7 +143,11 @@ const Cart = () => {
                 <span className="my-5 d-block text-end">
                     {cart?.length > 0 ? `Total: $ ${total}` : null}
                 </span>
-                <button>Checkout</button>
+                <div className="text-end">
+                    <button role="link" onClick={handleClick} id="checkout_btn">
+                        Checkout
+                    </button>
+                </div>
 
             </Container>
             <Footer />
