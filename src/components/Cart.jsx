@@ -84,6 +84,62 @@ const Cart = () => {
         }
     }
 
+    const savePurchase = async () => {
+        try {
+            let res = await fetch(USER_URL);
+            if (res.ok) {
+                let user = await res.json();
+                user.purchases = [];
+                let newPurchase = cart;
+                user.purchases.push(newPurchase);
+
+                let response = await fetch(USER_URL, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(user)
+                })
+
+                if (response.ok) {
+                    return;
+                }
+            }
+            else {
+                return new Error(res.statusText);
+            }
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
+    const emptyCart = async () => {
+        try {
+            let res = await fetch(USER_URL);
+            if (res.ok) {
+                let user = await res.json();
+                user.cart = [];
+                let response = await fetch(USER_URL, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(user),
+                });
+
+                if (response.ok) {
+                    setCart([]); // Aggiungi questa riga per svuotare "cart" nello stato locale
+                    return;
+                }
+            } else {
+                return new Error(res.statusText);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
 
     useEffect(() => { getCartProducts() }, []);
 
@@ -144,7 +200,12 @@ const Cart = () => {
                     {cart?.length > 0 ? `Total: $ ${total}` : null}
                 </span>
                 <div className="text-end">
-                    <button role="link" onClick={handleClick} id="checkout_btn">
+                    <button role="link" onClick={() => {
+                        emptyCart();
+                        savePurchase();
+                        handleClick();
+
+                    }} id="checkout_btn">
                         Checkout
                     </button>
                 </div>
