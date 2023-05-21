@@ -11,6 +11,7 @@ import Favorites from './components/Favorites';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 import ThankYou from './components/ThankYou';
+import Profile from './components/Profile';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path='/favorites' element={<Favorites />} />
           <Route path='/signup' element={<SignUp />} />    
           <Route path='/thankyou' element={<ThankYou />} />    
+          <Route path='/profile' element={<Profile />} />    
         </Routes>
 
       </div>

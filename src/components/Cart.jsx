@@ -89,7 +89,7 @@ const Cart = () => {
             let res = await fetch(USER_URL);
             if (res.ok) {
                 let user = await res.json();
-                user.purchases = user.cart; // Copia l'array "cart" in "purchases"
+                user.purchases.push(...user.cart);
                 user.cart = []; // Svuota l'array "cart"
                 let response = await fetch(USER_URL, {
                     method: "PUT",

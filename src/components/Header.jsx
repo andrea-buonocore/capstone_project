@@ -96,9 +96,11 @@ const Header = () => {
                             <span className="position-absolute mx-1">{cartItems === 0 ? null : cartItems}</span>
                         </div>
                     </Link>
-                    <span className="material-symbols-outlined mx-3">
-                        account_circle
-                    </span>
+                    <Link to={'/profile'}>
+                        <span className="material-symbols-outlined mx-3">
+                            account_circle
+                        </span>
+                    </Link>
                 </div>
             </Container>
         </header >
