@@ -20,14 +20,6 @@ const Header = () => {
         }
     }
 
-
-    //riferimento all'input field
-    const inputField = document.getElementById('inputField')
-
-    const toggleInputField = () => {
-        inputField.classList.toggle('d-none')
-    }
-
     const getCartItems = async () => {
         try {
             let res = await fetch(USER_URL);
@@ -70,37 +62,36 @@ const Header = () => {
 
     return (
         <header className="py-4 fixed-top">
-            <Container className="d-flex align-items-center justify-content-between">
-                <Link to={'/home'}>
-                    <span className="fw-bold">styleX</span>
-                </Link>
-                <div className="d-none d-md-inline-block d-flex flex-row align-items-center">
-                    <span className="material-symbols-outlined mx-3" onClick={toggleInputField}>
-                        search
-                    </span>
-                    <input type="text" name="search" className="d-none" placeholder="search product..." id="inputField" />
-                    <Link to={'/favorites'} style={{ padding: 0 }}>
-                        <div className="d-inline-block position-relative mx-3">
-                            <span className="material-symbols-outlined">
-                                favorite
-                            </span>
-
-                            <span className="position-absolute mx-1">{favoritesItems === 0 ? null : favoritesItems}</span>
+            <Container>
+                <div className="d-flex justify-content-between align-items-center">
+                    <Link to={'/home'}>
+                        <span className="fw-bold">styleX</span>
+                    </Link>
+                    <div className="d-flex align-items-center justify-content-center">
+                        <div className="d-inline-block mx-3 d-flex align-items-center">
+                            <Link to={'/favorites'}>
+                                <span className="d-inline block material-symbols-outlined">
+                                    favorite
+                                </span>
+                            </Link>
+                            <span className="d-inline block">{favoritesItems === 0 ? null : favoritesItems}</span>
                         </div>
-                    </Link>
-                    <Link to={'/cart'}>
-                        <div className="d-inline-block position-relative mx-3">
-                            <span className="material-symbols-outlined">
-                                shopping_cart
-                            </span>
-                            <span className="position-absolute mx-1">{cartItems === 0 ? null : cartItems}</span>
+                        <div className="d-inline mx-3 d-flex align-items-center">
+                            <Link to={'/cart'}>
+                                <span className="d-inline-block material-symbols-outlined mx-1">
+                                    shopping_cart
+                                </span>
+                            </Link>
+                            <span className="d-inline-block">{cartItems === 0 ? null : cartItems}</span>
                         </div>
-                    </Link>
-                    <Link to={'/profile'}>
-                        <span className="material-symbols-outlined mx-3">
-                            account_circle
-                        </span>
-                    </Link>
+                        <div className="d-inline mx-3">
+                            <Link to={'/profile'}>
+                                <span className="material-symbols-outlined">
+                                    account_circle
+                                </span>
+                            </Link>
+                        </div>
+                    </div>
                 </div>
             </Container>
         </header >
