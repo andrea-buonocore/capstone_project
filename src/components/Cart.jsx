@@ -89,11 +89,16 @@ const Cart = () => {
             let res = await fetch(USER_URL);
             if (res.ok) {
                 let user = await res.json();
-
+                let date = new Date();
+                let day = date.getDate();
+                let month = (date.getMonth()+1);
+                let year = date.getFullYear();
+                let fullDate = `${day}/${month}/${year}`;
                 // Crea un nuovo oggetto che contiene l'oggetto del carrello e la data corrente
                 let purchase = {
                     items: user.cart,
-                    date: new Date().toString()
+                    date: fullDate,
+                    totalPrice: total.toFixed(2)
                 };
 
                 user.purchases.push(purchase); // Aggiungi il nuovo oggetto al tuo array "purchases"
