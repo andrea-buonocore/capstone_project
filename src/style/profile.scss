@@ -1,6 +1,18 @@
 @import './partials/colors';
-@import './partials/mixins';
 
 #profile_container {
     padding: $padding;
+
+    button {
+        border: 0;
+        background-color: $main_gray;
+        color: $minimal_gray;
+        padding: 1em 2em;
+    }
+
+    .purchase_item {
+        height: 100px;
+        width: 100px;
+        object-fit: contain;
+    }
 }

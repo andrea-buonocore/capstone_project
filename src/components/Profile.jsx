@@ -37,36 +37,49 @@ const Profile = () => {
                 {
                     user && (
                         <>
-                            <div className="d-flex align-items-center justify-content-between">
-                                <span className="my-3">account: {user.email}</span>
+                            <div className="my-3 d-flex justify-content-between align-items-center">
+                                <span>{user.email}</span>
                                 <button onClick={() => {
                                     localStorage.removeItem('userID');
                                     navigate('/');
 
                                 }}>LOGOUT</button>
                             </div>
-                            <br />
+                            <h3 className="my-5 ">Recent Purchases</h3>
 
-                            <span className="my-3">Your Purchases:</span>
                             {
                                 user.purchases.map((purchase, index) => {
                                     return (
-                                        <Row key={index} xs={1} className="my-4 align-items-center">
-                                            <Col className="d-flex justify-content-between align-items-center">
-                                                <div>
-                                                    <span>Purchased: {purchase.date}</span>
-                                                    <br />
-                                                    <span>$ {purchase.totalPrice}</span>
-                                                </div>
+                                        <Row className="my-3" key={index}>
+                                            <Col>
+                                                <span className="d-block">Purchased on: {purchase.date}</span>
+                                                <span className="d-block">Price: $ {purchase.totalPrice}</span>
+
+                                                <Row xs={3} md={6} className="my-3">
+                                                    {
+                                                        purchase.items.map((item, index) => {
+                                                            return (
+                                                                <Col className="text-center">
+                                                                    <Link to={`/product/${item.id}`}>
+                                                                        <img src={item.image} alt={item.title} className="purchase_item" />
+                                                                    </Link>
+                                                                </Col>
+                                                            )
+                                                        })
+                                                    }
+                                                </Row>
+
                                             </Col>
                                         </Row>
                                     )
                                 })
                             }
+
                         </>
                     )
                 }
             </Container>
+
         </>
     )
 }

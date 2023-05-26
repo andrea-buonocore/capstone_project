@@ -11,7 +11,7 @@ body {
 
 a {
     text-decoration: none;
-    
+
     &:visited,
     &:link,
     &:active,
@@ -20,8 +20,3 @@ a {
         color: $main_gray !important;
     }
 }
-
-// .accordion-button {
-//     background: $main_gray !important;
-//     color: $minimal_gray !important;
-// }
