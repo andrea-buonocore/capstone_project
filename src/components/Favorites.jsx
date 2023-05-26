@@ -41,9 +41,6 @@ const Favorites = () => {
                     body: JSON.stringify(user)
                 });
                 if (res.ok) {
-                    // window.confirm(`Do you really want to remove ${product.title} from your cart?`);
-
-                    alert(`${product.title} removed from favorites.`);
                     getFavorites();
                     setIsLoading(false);
 

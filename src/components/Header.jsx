@@ -70,7 +70,7 @@ const Header = () => {
                     <div className="d-flex align-items-center justify-content-center">
                         <div className="d-inline-block mx-3 d-flex align-items-center">
                             <Link to={'/favorites'}>
-                                <span className="d-inline block material-symbols-outlined">
+                                <span className="d-inline block material-symbols-outlined mx-1">
                                     favorite
                                 </span>
                             </Link>
