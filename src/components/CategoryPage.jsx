@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Col, Container, Row } from "react-bootstrap"
-import { Link, useParams } from "react-router-dom";
+import { Container, Row } from "react-bootstrap"
+import { useParams } from "react-router-dom";
 import Product from "./Product";
 import Spinner from 'react-bootstrap/Spinner';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';

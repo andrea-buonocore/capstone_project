@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-
 import Spinner from 'react-bootstrap/Spinner';
 import { Col, Container, Row } from "react-bootstrap";
 import Header from './Header';
 import Footer from './Footer';
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { loadStripe } from '@stripe/stripe-js';
 
 const Cart = () => {
@@ -88,7 +87,7 @@ const Cart = () => {
                 let user = await res.json();
                 let date = new Date();
                 let day = date.getDate();
-                let month = (date.getMonth()+1);
+                let month = (date.getMonth() + 1);
                 let year = date.getFullYear();
                 let fullDate = `${day}/${month}/${year}`;
                 // Crea un nuovo oggetto che contiene l'oggetto del carrello e la data corrente
@@ -122,7 +121,7 @@ const Cart = () => {
 
 
 
-    
+
 
 
     useEffect(() => { getCartProducts() }, []);
@@ -183,15 +182,18 @@ const Cart = () => {
                 <span className="my-5 d-block text-end">
                     {cart?.length > 0 ? `Total: $ ${total}` : null}
                 </span>
-                <div className="text-end">
-                    <button role="link" onClick={() => {
-                        savePurchase();
-                        handleClick();
-
-                    }} id="checkout_btn">
-                        Checkout
-                    </button>
-                </div>
+                {
+                    cart?.length > 0 && (
+                        <div className="text-end">
+                            <button role="link" onClick={() => {
+                                savePurchase();
+                                handleClick();
+                            }} id="checkout_btn">
+                                Checkout
+                            </button>
+                        </div>
+                    )
+                }
 
             </Container>
             <Footer />
