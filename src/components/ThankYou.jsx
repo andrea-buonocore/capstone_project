@@ -7,24 +7,24 @@ const ThankYouPage = () => {
     const [countdown, setCountdown] = useState(10);
     const navigate = useNavigate();
 
-    // useEffect(() => {
-    //     const timer = setInterval(() => {
-    //         setCountdown((prevCountdown) => prevCountdown - 1);
-    //     }, 1000);
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCountdown((prevCountdown) => prevCountdown - 1);
+        }, 1000);
 
-    //     if (countdown === 0) {
-    //         clearInterval(timer);
-    //         // Reindirizza alla homepage
-    //         navigate('/home');
-    //     }
+        if (countdown === 0) {
+            clearInterval(timer);
+            // Reindirizza alla homepage
+            navigate('/home');
+        }
 
-    //     return () => {
-    //         clearInterval(timer);
-    //     };
-    // }, [countdown]);
+        return () => {
+            clearInterval(timer);
+        };
+    }, [countdown]);
 
     return (
-        <Container id='ty_container' className='position-absolute w-100 h-100 d-flex flex-column align-items-center justify-content-center'>
+        <Container id='ty_container' className='h-100 d-flex flex-column align-items-center justify-content-center'>
                 <h2 className='my-3'>Thank You for Your Purchase!</h2>
                 <p className='my-3'>Your order has been successfully placed.</p>
                 <p className='my-3'>
