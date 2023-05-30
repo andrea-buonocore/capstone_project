@@ -85,7 +85,7 @@ const Cart = () => {
             let res = await fetch(USER_URL);
             if (res.ok) {
                 let user = await res.json();
-                
+
                 let date = new Date();
                 let day = date.getDate();
                 let month = (date.getMonth() + 1);
@@ -97,13 +97,17 @@ const Cart = () => {
                     date: fullDate,
                     totalPrice: total.toFixed(2)
                 };
-                
 
-                
-                user.purchases = [];
-                user.purchases.push(purchase); // Aggiungi il nuovo oggetto al tuo array "purchases"
+                if (user.purchases) {
+                    user.purchases.push(purchase); // Aggiungi il nuovo oggetto al tuo array "purchases"
+                }
+                else {
+                    user.purchases = [];
+                    user.purchases.push(purchase); // Aggiungi il nuovo oggetto al tuo array "purchases"
+                }
+
                 user.cart = []; // Svuota l'array "cart"
-                
+
                 let response = await fetch(USER_URL, {
                     method: "PUT",
                     headers: {
