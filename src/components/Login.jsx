@@ -53,7 +53,7 @@ const Login = () => {
             <Row className='justify-content-center h-100 align-items-center flex-column'>
                 {
                     userError && (
-                        <Col xs={12} md={6} lg={4} className='my-3 p-0'>
+                        <Col xs={10} md={6} lg={4} className='my-3 p-0'>
                             <Alert key="danger" variant="danger">
                                 User do not exist. Please try again.
                             </Alert>
@@ -61,7 +61,7 @@ const Login = () => {
                     )
                 }
 
-                <Col className='form_col' xs={12} md={6} lg={4}>
+                <Col className='form_col' xs={10} md={6} lg={4}>
                     <form onSubmit={formik.handleSubmit} autoComplete='off'>
                         <div className='my-3'>
                             <label htmlFor="email" className='d-block input_label mb-2'>Email</label>

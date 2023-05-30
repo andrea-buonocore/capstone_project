@@ -59,7 +59,7 @@ const Profile = () => {
                                                     {
                                                         purchase.items.map((item, index) => {
                                                             return (
-                                                                <Col className="text-center">
+                                                                <Col key={index} className="text-center">
                                                                     <Link to={`/product/${item.id}`}>
                                                                         <img src={item.image} alt={item.title} className="purchase_item" />
                                                                     </Link>

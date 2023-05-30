@@ -97,10 +97,13 @@ const Cart = () => {
                     date: fullDate,
                     totalPrice: total.toFixed(2)
                 };
+                
+
+                
                 user.purchases = [];
                 user.purchases.push(purchase); // Aggiungi il nuovo oggetto al tuo array "purchases"
                 user.cart = []; // Svuota l'array "cart"
-                alert(JSON.stringify(user));
+                
                 let response = await fetch(USER_URL, {
                     method: "PUT",
                     headers: {
