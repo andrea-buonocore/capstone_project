@@ -25,7 +25,7 @@
   "scripts": {
     "start": "react-scripts start",
     "backend": "json-server-auth --watch db.json --port 3030",
-    "fullstack": "concurrently \"npm run backend\" \"npm build start\"",
+    "fullstack": "concurrently \"npm run backend\" \"npm run build\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
