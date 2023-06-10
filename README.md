@@ -6,6 +6,7 @@ Negozio online di moda maschile e femminile.
 
 Realizzato con: React, Bootstrap, SCSS, Stripe API (Client Side), Formik & Yup, JSON Server
 
+![stylex_screenshot](https://github.com/andrea-buonocore/capstone_project/assets/123959335/6dc6f731-af75-4f65-9219-c704ec1a531a)
 
 
 
@@ -50,4 +51,6 @@ Start JSON Server
   json-server --watch db.json --port 3030
 
 ```
+
+
 
